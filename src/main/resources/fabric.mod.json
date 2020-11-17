@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "EcoEnchants",
+  "version": "${version}",
+  "name": "EcoEnchants",
+  "description": "",
+  "authors": [
+    "Jpuf"
+  ],
+  "contact": {
+    "website": "https://Jpuf.xyz"
+  },
+  "license": "MIT",
+  "icon": "assets/EcoEnchants/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "client": [
+      "xyz.jpuf.ecoenchants.client.EcoEnchantsClient"
+    ],
+    "main": [
+      "xyz.jpuf.ecoenchants.EcoEnchants"
+    ]
+  },
+  "mixins": [
+    "EcoEnchants.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.10.8",
+    "fabric": "*",
+    "minecraft": "1.16.4"
+  }
+}
