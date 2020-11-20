@@ -4,6 +4,9 @@
   "package": "xyz.jpuf.ecoenchants.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "LivingEntityMixin",
+    "EntityAccessor",
+    "ScheduleAccessor"
   ],
   "client": [
   ],
