@@ -4,9 +4,11 @@
   "package": "xyz.jpuf.ecoenchants.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "LivingEntityMixin",
     "EntityAccessor",
-    "ScheduleAccessor"
+    "LivingEntityMixin",
+    "ScheduleAccessor",
+    "SpeedDisplay",
+    "Events.OnBlockBreakAttemptMixin"
   ],
   "client": [
   ],

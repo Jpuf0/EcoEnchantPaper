@@ -1,4 +1,4 @@
-package xyz.jpuf.ecoenchants.Enchantments;
+package xyz.jpuf.ecoenchants.Enchantments.normal;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
@@ -9,8 +9,8 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 
 public class Stray_Aspect extends Enchantment {
-    protected Stray_Aspect(Rarity weight, EquipmentSlot... slotTypes) {
-        super(weight, EnchantmentTarget.WEAPON, slotTypes);
+    public Stray_Aspect() {
+        super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override

@@ -1,11 +1,11 @@
-package xyz.jpuf.ecoenchants.Enchantments;
+package xyz.jpuf.ecoenchants.Enchantments.normal;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 
 public class Launch extends Enchantment {
-    protected Launch(Rarity weight, EquipmentSlot... slotTypes) {
+    public Launch(Rarity weight, EquipmentSlot... slotTypes) {
         super(weight, EnchantmentTarget.WEARABLE, slotTypes);
     }
 
