@@ -1,4 +1,4 @@
-package xyz.jpuf.ecoenchants.Utils;
+package xyz.jpuf.ecoenchants.Utils.Inventory;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;

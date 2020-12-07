@@ -5,8 +5,8 @@ import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 
 
-public class Telekinisis extends Enchantment {
-    public Telekinisis(Rarity weight, EquipmentSlot... slotTypes){
+public class Telekinesis extends Enchantment {
+    public Telekinesis(Rarity weight, EquipmentSlot... slotTypes){
         super(weight, EnchantmentTarget.BREAKABLE, slotTypes);
     }
 }

@@ -1,6 +1,5 @@
-package xyz.jpuf.ecoenchants.Blocks.Blocks;
+package xyz.jpuf.ecoenchants.extras.Blocks.Blocks;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,51 +10,48 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
-import xyz.jpuf.ecoenchants.Blocks.BlockEntities.Decoder_TableEntity;
 
-public class Decoder_Table extends BlockWithEntity {
-    public Decoder_Table() {
-        super(FabricBlockSettings.of(Material.METAL).hardness(4.0f));
-    }
-
-    @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return VoxelShapes.cuboid(0f, 0f, 0f, 16.0D, 12.0D, 16.0D);
+public class BoxBlock extends BlockWithEntity {
+    public BoxBlock() {
+        super(AbstractBlock.Settings.copy(Blocks.OAK_WOOD));
     }
 
     @Override
     public BlockEntity createBlockEntity(BlockView world) {
-        return new Decoder_TableEntity();
+        return new BoxBlockEntity();
     }
 
     @Override
-    public BlockRenderType getRenderType(BlockState state){
+    public BlockRenderType getRenderType(BlockState state) {
+        //With inheriting from BlockWithEntity this defaults to INVISIBLE, so we need to change that!
         return BlockRenderType.MODEL;
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit){
-        if(!world.isClient) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (!world.isClient) {
+            //This will call the createScreenHandlerFactory method from BlockWithEntity, which will return our blockEntity casted to
+            //a namedScreenHandlerFactory. If your block class does not extend BlockWithEntity, it needs to implement createScreenHandlerFactory.
             NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
 
-            if(screenHandlerFactory != null){
+            if (screenHandlerFactory != null) {
+                //With this call the server will request the client to open the appropriate Screenhandler
                 player.openHandledScreen(screenHandlerFactory);
             }
         }
         return ActionResult.SUCCESS;
     }
 
+
+    //This method will drop all items onto the ground when the block is broken
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof Decoder_TableEntity) {
-                ItemScatterer.spawn(world, pos, (Decoder_TableEntity)blockEntity);
+            if (blockEntity instanceof BoxBlockEntity) {
+                ItemScatterer.spawn(world, pos, (BoxBlockEntity)blockEntity);
                 // update comparators
                 world.updateComparators(pos,this);
             }

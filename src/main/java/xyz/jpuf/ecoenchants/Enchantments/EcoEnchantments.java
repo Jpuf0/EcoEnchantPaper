@@ -3,6 +3,9 @@ package xyz.jpuf.ecoenchants.Enchantments;
 import net.minecraft.enchantment.Enchantment.Rarity;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import xyz.jpuf.ecoenchants.EcoEnchants;
@@ -14,7 +17,7 @@ import java.util.stream.Collectors;
 
 
 public class EcoEnchantments {
-    private static final Set<Enchantment> ecoEnchants = new HashSet<>();
+    private static final Set<ItemStack> ecoEnchants = new HashSet<>();
 
     private static final EquipmentSlot[] ALL_ARMOR;
     public static final Enchantment STRAY_ASPECT;
@@ -32,8 +35,8 @@ public class EcoEnchantments {
         ABATTOIR = register("abattoir", new Abattoir());
         ABRASION = register("abrasion", new Abrasion());
         LAUNCH = register("launch", new Launch(Rarity.RARE, EquipmentSlot.CHEST));
-        STRAY_ASPECT = register("stray_aspect", new Stray_Aspect());
-        TELEKINESIS = register("telekinisis", new Telekinisis(Rarity.VERY_RARE, EquipmentSlot.MAINHAND));
+        STRAY_ASPECT = register("stray_aspect", new StrayAspect());
+        TELEKINESIS = register("telekinesis", new Telekinesis(Rarity.VERY_RARE, EquipmentSlot.MAINHAND));
     }
 
     public static void register() {
@@ -45,6 +48,21 @@ public class EcoEnchantments {
     }
 
     public static Enchantment getByName(String name) {
-        return Registry.ENCHANTMENT.get(Registry.ENCHANTMENT.getIds().stream().filter(entry -> entry.toString().equalsIgnoreCase(name)).findFirst().get());
+        return Registry.ENCHANTMENT.get(Registry.ENCHANTMENT.getIds().stream().filter(entry -> entry.getPath().equalsIgnoreCase(name)).findFirst().get());
+    }
+
+    public static Set<ItemStack> getBooks() {
+        ecoEnchants.clear();
+        for(Identifier enchantment : new HashSet<>(all())){
+//            System.out.println("Path: " + enchantment.getPath());
+            System.out.println(getByName(enchantment.getPath()));
+            ItemStack ebook = new ItemStack(Items.ENCHANTED_BOOK);
+            ebook.addEnchantment(getByName(enchantment.getPath()), getByName(enchantment.getPath()).getMaxLevel());
+            System.out.println(ebook);
+            ecoEnchants.add(ebook);
+        }
+        return ecoEnchants;
+        //        new ItemStack(Items.ENCHANTED_BOOK).addEnchantment();
+//        return Registry.ENCHANTMENT.getIds().stream().filter()
     }
 }

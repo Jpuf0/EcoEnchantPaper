@@ -19,6 +19,9 @@
   "entrypoints": {
     "main": [
       "xyz.jpuf.ecoenchants.EcoEnchants"
+    ],
+    "client": [
+      "xyz.jpuf.ecoenchants.client.ClientScreenHandler"
     ]
   },
   "mixins": [
